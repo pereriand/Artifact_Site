@@ -1,0 +1,151 @@
+/* --- Global Styles & Resets --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100vh; /* Ensure full viewport height */
+    width: 100vw;  /* Ensure full viewport width */
+    overflow: hidden; /* Prevent scrollbars */
+    background-color: #000000; /* Black background */
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- App Layout --- */
+.app-container {
+    width: 100%;
+    height: 100%;
+    position: relative; /* Context for overlays */
+    background-color: #000; /* Background for letterboxing */
+}
+
+/* --- Live Video Feed (User View) --- */
+#liveView {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Crucial: Scales video down to fit, preserving aspect ratio */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Base layer */
+}
+
+/* --- Hidden Canvas (Model Input) --- */
+#view {
+    display: none; /* Hide this canvas from the user */
+}
+
+/* --- UI Overlays --- */
+.ui-overlay {
+    position: absolute;
+    z-index: 10; /* Above video */
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    /* Add a subtle text shadow for readability on video */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.ui-overlay.top-right {
+    top: 0;
+    right: 0;
+}
+
+.ui-overlay.bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 24px; /* More space below FAB */
+}
+
+.ui-overlay.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+/* --- Controls Styling --- */
+.upload-btn {
+    font-family: inherit;
+    font-size: 15px; /* Slightly smaller */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.4); /* Subtle background */
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.upload-btn:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+}
+.upload-btn .material-icons {
+    font-size: 20px;
+}
+
+/* Hide actual file input */
+#fileInput {
+    display: none;
+}
+
+#camBtn.fab {
+    width: 64px;  /* Slightly larger FAB */
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+#camBtn.fab:hover {
+    transform: scale(1.05);
+}
+#camBtn.fab .material-icons {
+    font-size: 32px; /* Larger icon */
+}
+
+/* Style for active camera state (relies on JS adding 'cam-on' class) */
+#camBtn.fab.cam-on {
+    background-color: #E53935; /* Material Red 600 */
+    color: #ffffff;
+}
+
+/* --- Result Badge --- */
+#badge {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque */
+    color: #212121;
+    padding: 8px 16px; /* Slightly larger padding */
+    border-radius: 20px;
+    font-size: 15px; /* Slightly larger */
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    max-width: 300px; /* Limit width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 1; /* Keep it visible */
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(3px); /* Subtle blur behind badge */
+    -webkit-backdrop-filter: blur(3px);
+}
+#badge:empty { /* Hide if empty */
+    opacity: 0;
+    padding: 0; /* Collapse when empty */
+}

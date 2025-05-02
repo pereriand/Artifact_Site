@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifact Classifier (Landscape)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div class="app-container">
+        <video id="liveView" autoplay muted playsinline></video>
+
+        <canvas id="view" width="300" height="300"></canvas>
+
+        <div class="ui-overlay top-right">
+             <label for="fileInput" class="upload-btn" role="button" aria-label="Upload image">
+                <span class="material-icons">upload</span> Upload
+             </label>
+        </div>
+
+        <div class="ui-overlay bottom-center">
+            <button id="camBtn" class="fab" aria-label="Start Camera">
+                <span class="material-icons">videocam</span>
+            </button>
+        </div>
+
+        <div class="ui-overlay bottom-left">
+            <div id="badge">Loading model…</div>
+        </div>
+
+        <input type="file" id="fileInput" accept="image/*">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.18.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
